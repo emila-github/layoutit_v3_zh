@@ -300,7 +300,10 @@ $(window).resize(function() {
 	$("body").css("min-height", $(window).height() - 90);
 	$(".demo").css("min-height", $(window).height() - 160)
 });
-
+/**
+ * 从本地缓存中读取上一次缓存的编辑结构，并初始化 .demo内容
+ * @returns {boolean}
+ */
 function restoreData(){
 	if (supportstorage()) {
 		layouthistory = JSON.parse(localStorage.getItem("layoutdata"));
@@ -336,6 +339,7 @@ $(document).ready(function() {
 	});
 	$("body").css("min-height", $(window).height() - 50);
 	$(".demo").css("min-height", $(window).height() - 130);
+    //左侧“布局设置”控件拖动
 	$(".sidebar-nav .lyrow").draggable({
 		connectToSortable: ".demo",
 		helper: "clone",
@@ -345,7 +349,7 @@ $(document).ready(function() {
 			startdrag = 1;
 		},
 		drag: function(e, t) {
-			t.helper.width(400)
+			t.helper.width(400);//设定被拖动对象宽度
 		},
 		stop: function(e, t) {
 			$(".demo .column").sortable({
@@ -364,6 +368,7 @@ $(document).ready(function() {
 			startdrag = 0;
 		}
 	});
+    //左侧“基础css”、“COMPONENTS”、“ JAVASCRIPT ”控件拖动
 	$(".sidebar-nav .box").draggable({
 		connectToSortable: ".column",
 		helper: "clone",
@@ -373,7 +378,7 @@ $(document).ready(function() {
 			startdrag = 1;
 		},
 		drag: function(e, t) {
-			t.helper.width(400)
+			t.helper.width(400);
 		},
 		stop: function() {
 			handleJsIds();
